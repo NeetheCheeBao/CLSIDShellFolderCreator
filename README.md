@@ -1,2 +1,33 @@
-# CLSIDShellFolderCreator
-快速创建Windows特殊文件夹
+# CLSID Shell Folder Creator
+
+<div align="center">
+
+![Python Version](https://img.shields.io/badge/Python-3.x-blue?style=flat-square&logo=python)
+![OS Windows](https://img.shields.io/badge/OS-Windows-0078D6?style=flat-square&logo=windows)
+[![GitHub stars](https://img.shields.io/github/stars/NeetheCheeBao/CLSIDShellFolderCreator?style=flat-square)](https://github.com/NeetheCheeBao/CLSIDShellFolderCreator/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/NeetheCheeBao/CLSIDShellFolderCreator?style=flat-square)](https://github.com/NeetheCheeBao/CLSIDShellFolderCreator/network)
+[![GitHub issues](https://img.shields.io/github/issues/NeetheCheeBao/CLSIDShellFolderCreator?style=flat-square)](https://github.com/NeetheCheeBao/CLSIDShellFolderCreator/issues)
+[![GitHub license](https://img.shields.io/github/license/NeetheCheeBao/CLSIDShellFolderCreator?style=flat-square)](https://github.com/NeetheCheeBao/CLSIDShellFolderCreator/blob/main/LICENSE)
+
+</div>
+
+这是一个基于 Python 和 Tkinter 开发的轻量级 Windows 系统工具，旨在帮助用户快速、便捷地创建 Windows 特殊外壳文件夹（CLSID 文件夹，如常见的“上帝模式”及其他快捷入口）。
+
+## ✨ 功能特点
+
+* **直观的 GUI 界面**：采用滚动列表设计，方便浏览和选择。
+* **一键批量创建**：支持一键生成列表中所有的特殊文件夹。
+* **悬浮提示 (Tooltip)**：鼠标悬停在按钮上即可快速查看对应的 GUID 代码。
+* **DPI 适配**：自动进行 Windows 高 DPI 缩放适配，保证界面清晰。
+
+![img](/assets/demo1.png)
+
+![img](/assets/demo2.png)
+
+## ⬇️ 下载使用
+
+前往 [Releases](RELEASES)页面下载
+
+## ⚖️ 许可证
+
+本项目采用 MIT 许可证 - 详情请参阅 [LICENSE](LICENSE) 文件。
