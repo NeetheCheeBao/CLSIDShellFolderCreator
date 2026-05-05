@@ -1,0 +1,2 @@
+# CLSIDShellFolderCreator
+快速创建Windows特殊文件夹
