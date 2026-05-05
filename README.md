@@ -26,7 +26,7 @@
 
 ## ⬇️ 下载使用
 
-前往 [Releases](RELEASES)页面下载
+前往 [Releases](https://github.com/NeetheCheeBao/CLSIDShellFolderCreator/releases)页面下载
 
 ## ⚖️ 许可证
 
