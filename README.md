@@ -5,8 +5,6 @@
 ![Python Version](https://img.shields.io/badge/Python-3.x-blue?style=flat-square&logo=python)
 ![OS Windows](https://img.shields.io/badge/OS-Windows-0078D6?style=flat-square&logo=windows)
 [![GitHub stars](https://img.shields.io/github/stars/NeetheCheeBao/CLSIDShellFolderCreator?style=flat-square)](https://github.com/NeetheCheeBao/CLSIDShellFolderCreator/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/NeetheCheeBao/CLSIDShellFolderCreator?style=flat-square)](https://github.com/NeetheCheeBao/CLSIDShellFolderCreator/network)
-[![GitHub issues](https://img.shields.io/github/issues/NeetheCheeBao/CLSIDShellFolderCreator?style=flat-square)](https://github.com/NeetheCheeBao/CLSIDShellFolderCreator/issues)
 [![GitHub license](https://img.shields.io/github/license/NeetheCheeBao/CLSIDShellFolderCreator?style=flat-square)](https://github.com/NeetheCheeBao/CLSIDShellFolderCreator/blob/main/LICENSE)
 
 </div>
@@ -17,11 +15,13 @@
 
 * **直观的 GUI 界面**：采用滚动列表设计，方便浏览和选择。
 * **一键批量创建**：支持一键生成列表中所有的特殊文件夹。
-* **悬浮提示 (Tooltip)**：鼠标悬停在按钮上即可快速查看对应的 GUID 代码。
+* **悬浮提示**：鼠标悬停在按钮上即可快速查看对应的 GUID 代码。
 * **DPI 适配**：自动进行 Windows 高 DPI 缩放适配，保证界面清晰。
 
+## 📷 软件截图
 ![img](/assets/demo1.png)
 
+## 📂 创建预览
 ![img](/assets/demo2.png)
 
 ## ⬇️ 下载使用
