@@ -21,7 +21,7 @@
 ## 📄 具体涉及
 
 <details>
-<summary><a href="#">点击此处展开</a></summary>
+<summary> 点击此处展开 </summary>
 
 > ```text
 > .{ED7BA470-8E54-465E-825C-99712043E01C}
