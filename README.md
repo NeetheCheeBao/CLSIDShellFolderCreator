@@ -190,10 +190,10 @@
 </details>
 
 ## 📷 软件截图
-![img](/assets/demo3.png)
+![img](/screenshot/demo3.png)
 
 ## 📂 创建预览
-![img](/assets/demo2.png)
+![img](/screenshot/demo2.png)
 
 ## ⬇️ 下载使用
 
