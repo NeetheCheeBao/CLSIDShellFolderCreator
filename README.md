@@ -190,7 +190,7 @@
 </details>
 
 ## 📷 软件截图
-![img](/screenshot/demo3.png)
+![img](/screenshot/demo1.png)
 
 ## 📂 创建预览
 ![img](/screenshot/demo2.png)

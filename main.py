@@ -59,7 +59,7 @@ class ToolTip:
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("CLSIDShellFolderCreator_1.0.1")
+        self.title("CLSIDShellFolderCreator_1.0.2")
         self.geometry("440x800")
         self.configure(bg="#FFFFFF")
         
