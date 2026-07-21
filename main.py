@@ -70,7 +70,7 @@ class App(tk.Tk):
         self.log_counter = 1
         self.is_creating = False
         
-        self.guids = {
+        self.clsids = {
             ".{ED7BA470-8E54-465E-825C-99712043E01C}": "上帝模式",
             ".{D20EA4E1-3957-11d2-A40B-0C5020524153}": "管理工具",
             ".{7007ACC7-3202-11D1-AAD2-00805FC1270E}": "网络连接",
@@ -260,13 +260,13 @@ class App(tk.Tk):
             dir_path = os.path.normpath(dir_path)
             self.path_var.set(dir_path)
 
-    def copy_guid(self, guid):
+    def copy_clsid(self, clsid):
         self.clipboard_clear()
-        self.clipboard_append(guid)
+        self.clipboard_append(clsid)
         
         self.log_box.config(state="normal")
         self.log_box.insert("end", f"[{self.log_counter}][拷贝成功]", "green")
-        self.log_box.insert("end", f"GUID：“{guid}”", "yellow")
+        self.log_box.insert("end", f"CLSID：“{clsid}”", "yellow")
         self.log_box.insert("end", "已拷贝到剪贴板\n", "green")
         
         self.log_counter += 1
@@ -360,7 +360,7 @@ class App(tk.Tk):
         self.canvas.bind("<MouseWheel>", self._on_mousewheel)
         self.scrollable_frame.bind("<MouseWheel>", self._on_mousewheel)
 
-        for index, (guid, name) in enumerate(self.guids.items(), 1):
+        for index, (clsid, name) in enumerate(self.clsids.items(), 1):
             row_frame = tk.Frame(self.scrollable_frame, bg="#FFFFFF")
             row_frame.pack(side="top", pady=6)
             
@@ -371,19 +371,19 @@ class App(tk.Tk):
             btn = tk.Button(row_frame, text=name, width=28, font=("Microsoft YaHei UI", 10), 
                             bg="#F3F3F3", foreground="#333333", activebackground="#DCDCDC",
                             relief="flat", bd=0, pady=8, cursor="hand2")
-            btn.config(command=lambda g=guid, n=name: self.create_folder(g, n))
+            btn.config(command=lambda c=clsid, n=name: self.create_folder(c, n))
             btn.pack(side="left")
             
             btn.bind("<Enter>", lambda e, w=btn: w.config(bg="#E5E5E5"), add="+")
             btn.bind("<Leave>", lambda e, w=btn: w.config(bg="#F3F3F3"), add="+")
             
-            btn.bind("<Button-3>", lambda e, g=guid: self.copy_guid(g))
+            btn.bind("<Button-3>", lambda e, c=clsid: self.copy_clsid(c))
 
             row_frame.bind("<MouseWheel>", self._on_mousewheel)
             lbl_index.bind("<MouseWheel>", self._on_mousewheel)
             btn.bind("<MouseWheel>", self._on_mousewheel)
             
-            ToolTip(btn, guid)
+            ToolTip(btn, clsid)
 
     def on_create_enter(self, event):
         if not self.is_creating:
@@ -423,21 +423,21 @@ class App(tk.Tk):
         self.log_box.config(state="disabled")
         self.update_idletasks()
 
-    def create_folder(self, guid, name):
+    def create_folder(self, clsid, name):
         current_out_dir = self.path_var.get()
         if not os.path.exists(current_out_dir):
             try:
                 os.makedirs(current_out_dir)
             except: pass
-        target_path = os.path.join(current_out_dir, guid)
+        target_path = os.path.join(current_out_dir, clsid)
         try:
             if not os.path.exists(target_path):
                 os.mkdir(target_path)
-                self.log_message(f"{name}创建成功，GUID为{guid}，路径为{target_path}", "green")
+                self.log_message(f"{name}创建成功，CLSID为{clsid}，路径为{target_path}", "green")
             else:
-                self.log_message(f"{name}创建失败，GUID为{guid}，已存在于路径{target_path}", "red")
+                self.log_message(f"{name}创建失败，CLSID为{clsid}，已存在于路径{target_path}", "red")
         except Exception:
-            self.log_message(f"{name}创建失败，GUID为{guid}，已存在于路径{target_path}", "red")
+            self.log_message(f"{name}创建失败，CLSID为{clsid}，已存在于路径{target_path}", "red")
 
     def create_all(self):
         if self.is_creating:
@@ -451,8 +451,8 @@ class App(tk.Tk):
         
         self.update()
         
-        for guid, name in self.guids.items():
-            self.create_folder(guid, name)
+        for clsid, name in self.clsids.items():
+            self.create_folder(clsid, name)
             self.update()
             
         if self.winfo_exists():
