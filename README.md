@@ -1,6 +1,5 @@
-# CLSID Shell Folder Creator
-
 <div align="center">
+<h1>CLSID Shell Folder Creator</h1>
 
 ![Python Version](https://img.shields.io/badge/Python-3.x-blue?style=flat-square&logo=python)
 ![OS Windows](https://img.shields.io/badge/OS-Windows-0078D6?style=flat-square&logo=windows)
