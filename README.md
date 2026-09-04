@@ -195,7 +195,19 @@
 ## 📂 创建预览
 ![img](/screenshot/demo2.png)
 
-## ⬇️ 下载使用
+## 🛠️ 本地编译
+
+```python
+pyinstaller -F -w -n CLSIDShellFolderCreator main.py
+```
+
+或
+
+```bash
+.\build.bat
+```
+
+## ⬇️ 下载发行版
 
 前往 [Releases](https://github.com/NeetheCheeBao/CLSIDShellFolderCreator/releases)页面下载
 
