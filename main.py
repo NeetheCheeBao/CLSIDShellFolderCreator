@@ -59,7 +59,7 @@ class ToolTip:
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("CLSIDShellFolderCreator_1.0.2")
+        self.title("CLSIDShellFolderCreator_1.0.3")
         self.geometry("440x800")
         self.configure(bg="#FFFFFF")
         
@@ -471,4 +471,6 @@ class App(tk.Tk):
 
 if __name__ == "__main__":
     app = App()
+    icon_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "icon.ico")
+    app.iconbitmap(icon_path)
     app.mainloop()
