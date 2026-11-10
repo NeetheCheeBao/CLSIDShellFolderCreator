@@ -1,4 +1,5 @@
 <div align="center">
+<img src="icon.ico" width="128" alt="logo" />
 <h1>CLSID Shell Folder Creator</h1>
 
 ![Python Version](https://img.shields.io/badge/Python-3.x-blue?style=flat-square&logo=python)
@@ -196,11 +197,7 @@
 
 ## 🛠️ 本地编译
 
-```python
-pyinstaller -F -w -n CLSIDShellFolderCreator main.py
-```
-
-或
+一键编译
 
 ```bash
 .\build.bat

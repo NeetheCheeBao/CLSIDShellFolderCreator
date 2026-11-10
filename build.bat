@@ -27,7 +27,20 @@ if not exist main.py (
   exit /b 1
 )
 
-set "NAME=CLSIDShellFolderCreator"
+for %%F in (version.ini icon.ico) do if not exist "%%F" goto :fail
+
+set "APP_NAME="
+set "APP_VERSION="
+for /f "usebackq tokens=1,* delims==" %%A in ("version.ini") do (
+  set "KEY=%%A"
+  set "VAL=%%B"
+  if /i "!KEY: =!"=="name" set "APP_NAME=!VAL: =!"
+  if /i "!KEY: =!"=="version" set "APP_VERSION=!VAL: =!"
+)
+if not defined APP_NAME goto :fail
+if not defined APP_VERSION goto :fail
+
+set "NAME=%APP_NAME%_%APP_VERSION%"
 set "EXE_OUT=dist\%NAME%.exe"
 set "BAR_WIDTH=30"
 set /a TOTAL_STEPS=5
@@ -46,7 +59,7 @@ python -c "import PyInstaller" >nul 2>&1
 if errorlevel 1 goto :fail
 
 call :progress "Compiling main.py to executable..."
-pyinstaller -F -w -n %NAME% --icon=icon.ico --add-data "icon.ico;." main.py >nul 2>&1
+pyinstaller -F -w -n %NAME% --icon=icon.ico --add-data "icon.ico;." --add-data "version.ini;." main.py >nul 2>&1
 if errorlevel 1 goto :fail
 
 call :progress "Cleaning temporary build files..."
@@ -54,12 +67,13 @@ if exist build rmdir /s /q build >nul 2>&1
 if exist "%NAME%.spec" del /f /q "%NAME%.spec" >nul 2>&1
 
 call :progress "Finalizing..."
+if not exist "%EXE_OUT%" goto :fail
 
 echo.
 echo BUILD OK  -^> %EXE_OUT%
 echo.
 
-timeout /t 1 /nobreak >nul
+timeout /t 3 /nobreak >nul
 exit /b 0
 
 :fail

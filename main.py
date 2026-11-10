@@ -2,19 +2,47 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog
 import os
+import sys
 import webbrowser
 import ctypes
 
+# 高分屏 DPI 感知，避免界面被系统缩放模糊
 try:
     ctypes.windll.shcore.SetProcessDpiAwareness(1)
 except Exception:
     pass
+
+
+def resource_dir():
+    # 打包后资源在 sys._MEIPASS，源码运行时在脚本目录
+    if getattr(sys, "frozen", False):
+        return getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
+    return os.path.dirname(os.path.abspath(__file__))
+
+
+def load_app_info():
+    # 名称/版本取自 version.ini，与 build.bat 共用
+    info = {}
+    try:
+        with open(os.path.join(resource_dir(), "version.ini"), encoding="utf-8") as f:
+            for line in f:
+                key, sep, value = line.partition("=")
+                if sep:
+                    info[key.strip().lower()] = value.strip()
+    except OSError:
+        pass
+    return info.get("name") or "CLSIDShellFolderCreator", info.get("version") or "0.0.0"
+
+
+APP_NAME, APP_VERSION = load_app_info()
+
 
 class ToolTip:
     def __init__(self, widget, text):
         self.widget = widget
         self.text = text
         self.tipwindow = None
+        # add="+" 不覆盖控件已有的事件绑定
         self.widget.bind("<Enter>", self.show_tip, add="+")
         self.widget.bind("<Leave>", self.hide_tip, add="+")
         self.widget.bind("<Motion>", self.move_tip, add="+")
@@ -44,6 +72,7 @@ class ToolTip:
         cx = x + 15
         cy = y + 15
         
+        # 贴近屏幕右/下边缘时把提示翻到鼠标另一侧
         if cx + tip_width > screen_width:
             cx = x - tip_width - 5
         if cy + tip_height > screen_height:
@@ -59,7 +88,7 @@ class ToolTip:
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("CLSIDShellFolderCreator_1.0.3")
+        self.title(f"{APP_NAME}_{APP_VERSION}")
         self.geometry("440x800")
         self.configure(bg="#FFFFFF")
         
@@ -68,8 +97,10 @@ class App(tk.Tk):
         
         self.resize_timer = None
         self.log_counter = 1
+        # is_creating：批量创建期间的互斥锁
         self.is_creating = False
         
+        # 键就是创建的目录名，开头的点号不可省；UNNAM 表示未命名条目
         self.clsids = {
             ".{ED7BA470-8E54-465E-825C-99712043E01C}": "上帝模式",
             ".{D20EA4E1-3957-11d2-A40B-0C5020524153}": "管理工具",
@@ -237,18 +268,22 @@ class App(tk.Tk):
         self.bind("<F1>", lambda event: self.create_all())
         self.bind("<F2>", lambda event: self.clear_log())
         self.bind("<F3>", lambda event: self.open_url())
+        # Configure 也会由子控件触发，需判断事件来源
         self.bind("<Configure>", self.on_window_resize)
 
     def _on_mousewheel(self, event):
+        # Windows 滚轮 delta 以 120 为一格
         self.canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
 
     def on_window_resize(self, event):
+        # 200ms 防抖，避免连续缩放反复重排
         if event.widget == self:
             if self.resize_timer:
                 self.after_cancel(self.resize_timer)
             self.resize_timer = self.after(200, self.update_layout)
 
     def update_layout(self):
+        # 同步内嵌框架宽度并刷新滚动区域
         self.canvas.itemconfig(self.frame_window, width=self.canvas.winfo_width())
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
 
@@ -270,6 +305,7 @@ class App(tk.Tk):
         self.log_box.insert("end", "已拷贝到剪贴板\n", "green")
         
         self.log_counter += 1
+        # 日志最多保留 200 行
         lines = int(self.log_box.index('end-1c').split('.')[0])
         if lines > 200:
             self.log_box.delete("1.0", f"{lines-200}.0")
@@ -345,6 +381,7 @@ class App(tk.Tk):
         self.log_box.tag_config("yellow", foreground="#d39e00") 
         self.log_box.config(state="disabled")
         
+        # Frame 不支持滚动条，用 Canvas + create_window 内嵌实现
         container = tk.Frame(self, bg="#FFFFFF")
         container.pack(side="top", fill="both", expand=True, padx=15, pady=5)
         
@@ -357,6 +394,7 @@ class App(tk.Tk):
         self.canvas.pack(side="left", fill="both", expand=True)
         scrollbar.pack(side="right", fill="y")
         
+        # 滚轮事件只发给鼠标所在控件，需逐个绑定
         self.canvas.bind("<MouseWheel>", self._on_mousewheel)
         self.scrollable_frame.bind("<MouseWheel>", self._on_mousewheel)
 
@@ -371,6 +409,7 @@ class App(tk.Tk):
             btn = tk.Button(row_frame, text=name, width=28, font=("Microsoft YaHei UI", 10), 
                             bg="#F3F3F3", foreground="#333333", activebackground="#DCDCDC",
                             relief="flat", bd=0, pady=8, cursor="hand2")
+            # 用默认参数固化本次循环的值，否则按钮都指向最后一个 CLSID
             btn.config(command=lambda c=clsid, n=name: self.create_folder(c, n))
             btn.pack(side="left")
             
@@ -410,11 +449,13 @@ class App(tk.Tk):
         self.update_idletasks()
 
     def log_message(self, message, tag):
+        # 只读 Text，写入前临时切回 normal
         self.log_box.config(state="normal")
         formatted_message = f"[{self.log_counter}] {message}"
         self.log_box.insert("end", formatted_message + "\n", tag)
         self.log_counter += 1
         
+        # 日志最多保留 200 行
         lines = int(self.log_box.index('end-1c').split('.')[0])
         if lines > 200:
             self.log_box.delete("1.0", f"{lines-200}.0")
@@ -424,6 +465,7 @@ class App(tk.Tk):
         self.update_idletasks()
 
     def create_folder(self, clsid, name):
+        # 核心：".{GUID}" 目录会被 Shell 识别为特殊入口，而非普通文件夹
         current_out_dir = self.path_var.get()
         if not os.path.exists(current_out_dir):
             try:
@@ -431,15 +473,18 @@ class App(tk.Tk):
             except: pass
         target_path = os.path.join(current_out_dir, clsid)
         try:
+            # 已存在则不覆盖
             if not os.path.exists(target_path):
                 os.mkdir(target_path)
                 self.log_message(f"{name}创建成功，CLSID为{clsid}，路径为{target_path}", "green")
             else:
                 self.log_message(f"{name}创建失败，CLSID为{clsid}，已存在于路径{target_path}", "red")
         except Exception:
+            # 异常统一记为失败
             self.log_message(f"{name}创建失败，CLSID为{clsid}，已存在于路径{target_path}", "red")
 
     def create_all(self):
+        # 创建期间锁定输入与按钮，防止重复触发
         if self.is_creating:
             return
         self.is_creating = True
@@ -451,6 +496,7 @@ class App(tk.Tk):
         
         self.update()
         
+        # self.update() 让日志逐条刷新
         for clsid, name in self.clsids.items():
             self.create_folder(clsid, name)
             self.update()
@@ -471,6 +517,6 @@ class App(tk.Tk):
 
 if __name__ == "__main__":
     app = App()
-    icon_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "icon.ico")
+    icon_path = os.path.join(resource_dir(), "icon.ico")
     app.iconbitmap(icon_path)
     app.mainloop()
