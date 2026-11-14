@@ -1,211 +1,82 @@
 <div align="center">
-<img src="icon.ico" width="128" alt="logo" />
+<img src="assets/icon.ico" width="128" alt="logo" />
 <h1>CLSID Shell Folder Creator</h1>
 
-![Python Version](https://img.shields.io/badge/Python-3.x-blue?style=flat-square&logo=python)
+![Rust](https://img.shields.io/badge/Rust-2021-orange?style=flat-square&logo=rust)
 ![OS Windows](https://img.shields.io/badge/OS-Windows-0078D6?style=flat-square&logo=windows)
-[![GitHub stars](https://img.shields.io/github/stars/NeetheCheeBao/CLSIDShellFolderCreator?style=flat-square)](https://github.com/NeetheCheeBao/CLSIDShellFolderCreator/stargazers)
-[![GitHub license](https://img.shields.io/github/license/NeetheCheeBao/CLSIDShellFolderCreator?style=flat-square)](https://github.com/NeetheCheeBao/CLSIDShellFolderCreator/blob/main/LICENSE)
+[![eGUI Rust GUI](https://img.shields.io/badge/UI-eGUI-orange?style=flat-square&logo=rust&logoColor=white)](https://github.com/emilk/egui)
+[![license](https://img.shields.io/github/license/NeetheCheeBao/CLSIDShellFolderCreator?style=flat-square)](LICENSE)
+
+> `Rust` + `eGUI` 编写的小工具，一键创建Windows特殊文件夹（例如“上帝模式”等）
 
 </div>
 
-这是一个基于 Python 和 Tkinter 开发的轻量级 Windows 系统工具，旨在帮助用户快速、便捷地创建 Windows 特殊外壳文件夹（CLSID 文件夹，如常见的“上帝模式”及其他快捷入口）。
-
 ## ✨ 功能特点
 
-* **直观的 GUI 界面**：采用滚动列表设计，方便浏览和选择。
-* **一键批量创建**：支持一键生成列表中所有的特殊文件夹。
-* **悬浮提示**：鼠标悬停在按钮上即可快速查看对应的 CLSID 代码。
-* **DPI 适配**：自动进行 Windows 高 DPI 缩放适配，保证界面清晰。
-* **快速拷贝**：支持右键直接拷贝对应 CLSID 。
+* **滚动列表**：160 个 CLSID 条目，序号 + 名称，点击即创建
+* **悬浮提示**：光标悬停显示完整 CLSID，右键直接复制到剪贴板
 
-## 📄 具体涉及
+## 📷 工具截图
 
-<details>
-<summary> 点击此处展开 </summary>
+![img](screenshot/demo1.png)
 
-> ```text
-> .{ED7BA470-8E54-465E-825C-99712043E01C}
-> .{D20EA4E1-3957-11d2-A40B-0C5020524153}
-> .{7007ACC7-3202-11D1-AAD2-00805FC1270E}
-> .{60632754-c523-4b62-b45c-4172da012619}
-> .{36eef7db-88ad-4e81-ad49-0e313f0c35f8}
-> .{450d8fba-ad25-11d0-98a8-0800361b1103}
-> .{374DE290-123F-4565-9164-39C4925E467B}
-> .{1CF1260C-4DD0-4ebb-811F-33C572699FDE}
-> .{33E28130-4E1E-4676-835A-98395C3BC3BB}
-> .{A0953C92-50DC-43bf-BE83-3742FED03C9C}
-> .{BD84B380-8CA2-1069-AB1D-08000948534C}
-> .{BB06C0E4-D293-4f75-8A90-CB05B6477EEE}
-> .{00021400-0000-0000-C000-000000000046}
-> .{031E4825-7B94-4dc3-B131-E946B44C8DD5}
-> .{208D2C60-3AEA-1069-A2D7-08002B30309D}
-> .{20D04FE0-3AEA-1069-A2D8-08002B30309D}
-> .{21EC2020-3AEA-1069-A2DD-08002B30309D}
-> .{2227A280-3AEA-1069-A2DE-08002B30309D}
-> .{645FF040-5081-101B-9F08-00AA002F954E}
-> .{8E908FC9-BECC-40f6-915B-F4CA0E70D03D}
-> .{00020D75-0000-0000-C000-000000000046}
-> .{025A5937-A6BE-4686-A844-36FE4BEC8B6D}
-> .{04731B67-D933-450a-90E6-4ACD2E9408FE}
-> .{05d7b0f4-2121-4eff-bf6b-ed3f69b894d9}
-> .{088e3905-0323-4b02-9826-5d99428e115f}
-> .{0907616E-F5E6-48D8-9D61-A91C3D28106D}
-> .{0AFACED1-E828-11D1-9187-B532F1E9575D}
-> .{0c39a5cf-1a7a-40c8-ba74-8900e6df5fcd}
-> .{0CD7A5C0-9F37-11CE-AE65-08002B2E1262}
-> .{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}
-> .{0DF44EAA-FF21-4412-828E-260A8728E7F1}
-> .{0E5AAE11-A475-4c5b-AB00-C66DE400274E}
-> .{1206F5F1-0569-412C-8FEC-3204630DFB70}
-> .{15eae92e-f17a-4431-9f28-805e482dafd4}
-> .{17cd9488-1228-4b2f-88ce-4298e93e0966}
-> .{1bef2128-2f96-4500-ba7c-098dc0049cb2}
-> .{1D2680C9-0E2A-469d-B787-065558BC7D43}
-> .{1f3427c8-5c10-4210-aa03-2ee45287d668}
-> .{1FA9085F-25A2-489B-85D4-86326EEDCD87}
-> .{22877a6d-37a1-461a-91b0-dbda5aaebc99}
-> .{241D7C96-F8BF-4F85-B01F-E2B043341A4B}
-> .{24ad3ad4-a569-4530-98e1-ab02f9417aa8}
-> .{2559a1f0-21d7-11d4-bdaf-00c04f60b9f0}
-> .{2559a1f2-21d7-11d4-bdaf-00c04f60b9f0}
-> .{2559a1f3-21d7-11d4-bdaf-00c04f60b9f0}
-> .{2559a1f5-21d7-11d4-bdaf-00c04f60b9f0}
-> .{2559a1f7-21d7-11d4-bdaf-00c04f60b9f0}
-> .{2559a1f8-21d7-11d4-bdaf-00c04f60b9f0}
-> .{267cf8a9-f4e3-41e6-95b1-af881be130ff}
-> .{26EE0668-A00A-44D7-9371-BEB064C98683}
-> .{28803F59-3A75-4058-995F-4EE5503B023C}
-> .{289978AC-A101-4341-A817-21EBA7FD046D}
-> .{289AF617-1CC3-42A6-926C-E6A863F0E3BA}
-> .{2965e715-eb66-4719-b53f-1672673bbefa}
-> .{2E9E59C0-B437-4981-A647-9C34B9B90891}
-> .{2F6CE85C-F9EE-43CA-90C7-8A9BD53A2467}
-> .{3080F90D-D7AD-11D9-BD98-0000947B0257}
-> .{3080F90E-D7AD-11D9-BD98-0000947B0257}
-> .{3134ef9c-6b18-4996-ad04-ed5912e00eb5}
-> .{323CA680-C24D-4099-B94D-446DD2D7249E}
-> .{328B0346-7EAF-4BBE-A479-7CB88A095F5B}
-> .{35786D3C-B075-49b9-88DD-029876E11C01}
-> .{38A98528-6CBF-4CA9-8DC0-B1E1D10F7B1B}
-> .{3936E9E4-D92C-4EEE-A85A-BC16D5EA0819}
-> .{3ADD1653-EB32-4cb0-BBD7-DFA0ABB5ACCA}
-> .{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}
-> .{3f6bc534-dfa1-4ab4-ae54-ef25a74e0107}
-> .{4026492F-2F69-46B8-B9BF-5654FC07E423}
-> .{418c8b64-5463-461d-88e0-75e2afa3c6fa}
-> .{4234d49b-0245-4df3-b780-3893943456e1}
-> .{4336a54d-038b-4685-ab02-99bb52d3fb8b}
-> .{437ff9c0-a07f-4fa0-af80-84b6c6440a16}
-> .{4564b25e-30cd-4787-82ba-39e73a750b14}
-> .{48e7caab-b918-4e58-a94d-505519c795dc}
-> .{5399E694-6CE5-4D6C-8FCE-1D8870FDCBA0}
-> .{58E3C745-D971-4081-9034-86E34B30836A}
-> .{59031a47-3f72-44a7-89c5-5595fe6b30ee}
-> .{5b934b42-522b-4c34-bbfe-37a3ef7b9c90}
-> .{5E5F29CE-E0A8-49D3-AF32-7A7BDC173478}
-> .{5ea4f148-308c-46d7-98a9-49041b1dd468}
-> .{5ED4F38C-D3FF-4D61-B506-6820320AEBFE}
-> .{63da6ec0-2e98-11cf-8d82-444553540000}
-> .{64693913-1c21-4f30-a98f-4e52906d3b56}
-> .{67718415-c450-4f3c-bf8a-b487642dc39b}
-> .{6785BFAC-9D2D-4be5-B7E2-59937E8FB80A}
-> .{679f85cb-0220-4080-b29b-5540cc05aab6}
-> .{67CA7650-96E6-4FDD-BB43-A8E774F73A57}
-> .{6DFD7C5C-2451-11d3-A299-00C04F8EF6AF}
-> .{71D99464-3B6B-475C-B241-E15883207529}
-> .{72b36e70-8700-42d6-a7f7-c9ab3323ee51}
-> .{7A9D77BD-5403-11d2-8785-2E0420524153}
-> .{7b81be6a-ce2b-4676-a29e-eb907a5126c5}
-> .{7BD29E00-76C1-11CF-9DD0-00A0C9034933}
-> .{7BD29E01-76C1-11CF-9DD0-00A0C9034933}
-> .{863aa9fd-42df-457b-8e4d-0de1b8015c60}
-> .{871C5380-42A0-1069-A2EA-08002B30309D}
-> .{87630419-6216-4ff8-a1f0-143562d16d5c}
-> .{877ca5ac-cb41-4842-9c69-9136e42d47e2}
-> .{88C6C381-2E85-11D0-94DE-444553540000}
-> .{896664F7-12E1-490f-8782-C0835AFD98FC}
-> .{89D83576-6BD1-4c86-9454-BEB04E94C819}
-> .{8FD8B88D-30E1-4F25-AC2B-553D3D65F0EA}
-> .{9113A02D-00A3-46B9-BC5F-9C04DADDD5D7}
-> .{93412589-74D4-4E4E-AD0E-E0CB621440FD}
-> .{9343812e-1c37-4a49-a12e-4b2d810d956b}
-> .{98F275B4-4FFF-11E0-89E2-7B86DFD72085}
-> .{992CFFA0-F557-101A-88EC-00DD010CCC48}
-> .{9a096bb5-9dc3-4d1c-8526-c3cbf991ea4e}
-> .{9C60DE1E-E5FC-40f4-A487-460851A8D915}
-> .{9C73F5E5-7AE7-4E32-A8E8-8D23B85255BF}
-> .{9DB7A13C-F208-4981-8353-73CC61AE2783}
-> .{9FE63AFD-59CF-4419-9775-ABCC3849F861}
-> .{a00ee528-ebd9-48b8-944a-8942113d46ac}
-> .{a3c3d402-e56c-4033-95f7-4885e80b0111}
-> .{a5a3563a-5755-4a6f-854e-afa3230b199f}
-> .{a6482830-08eb-41e2-84c1-73920c2badb9}
-> .{A8A91A66-3A7D-4424-8D24-04E180695C7A}
-> .{A8CDFF1C-4878-43be-B5FD-F8091C1C60D0}
-> .{AEE2420F-D50E-405C-8784-363C582BF45A}
-> .{AFDB1F70-2A4C-11d2-9039-00C04F8EEB3E}
-> .{b155bdf8-02f0-451e-9a26-ae317cfd7779}
-> .{b2952b16-0e07-4e5a-b993-58c52cb94cae}
-> .{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}
-> .{B4FB3F98-C1EA-428d-A78A-D1F5659CBA93}
-> .{B98A2BEA-7D42-4558-8BD1-832F41BAC6FD}
-> .{BB64F8A7-BEE7-4E1A-AB8D-7D8273F7FDB6}
-> .{BC48B32F-5910-47F5-8570-5074A8A5636A}
-> .{BD7A2E7B-21CB-41b2-A086-B309680C6B7E}
-> .{BD84B380-8CA2-1069-AB1D-08000948F534}
-> .{C2B136E2-D50E-405C-8784-363C582BF43E}
-> .{c57a6066-66a3-4d91-9eb9-41532179f0a5}
-> .{C58C4893-3BE0-4B45-ABB5-A63E4B8C8651}
-> .{D2035EDF-75CB-4EF1-95A7-410D9EE17170}
-> .{d3162b92-9365-467a-956b-92703aca08af}
-> .{d34a6ca6-62c2-4c34-8a7c-14709c1ad938}
-> .{D4480A50-BA28-11d1-8E75-00C04FA31A86}
-> .{d450a8a1-9568-45c7-9c0e-b4f9fb4537bd}
-> .{D555645E-D4F8-4c29-A827-D93C859C4F2A}
-> .{D9EF8727-CAC2-4e60-809E-86F80A666C91}
-> .{daf95313-e44d-46af-be1b-cbacea2c3065}
-> .{DFFACDC5-679F-4156-8947-C5C76BC0B67F}
-> .{e345f35f-9397-435c-8f95-4e922c26259e}
-> .{E413D040-6788-4C22-957E-175D1C513A34}
-> .{E7E4BC40-E76A-11CE-A9BB-00AA004AE837}
-> .{E88DCCE0-B7B3-11d1-A9F0-00AA0060FA31}
-> .{ECDB0924-4208-451E-8EE0-373C0956DE16}
-> .{ed50fc29-b964-48a9-afb3-15ebb9b97f36}
-> .{ED834ED6-4B5A-4bfe-8F11-A626DCB6A921}
-> .{EDC978D6-4D53-4b2f-A265-5805674BE568}
-> .{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}
-> .{F1390A9A-A3F4-4E5D-9C5F-98F3BD8D935C}
-> .{F3364BA0-65B9-11CE-A9BA-00AA004AE837}
-> .{F5175861-2688-11d0-9C5E-00AA00A45957}
-> .{F5FB2C77-0E2F-4A16-A381-3E560C68BC83}
-> .{F6B6E965-E9B2-444B-9286-10C9152EDBC5}
-> .{f8278c54-a712-415b-b593-b77a2be0dda9}
-> .{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}
-> .{f8c2ab3b-17bc-41da-9758-339d7dbf2d88}
-> .{F942C606-0914-47AB-BE56-1321B8035096}
-> .{FF393560-C2A7-11CF-BFF4-444553540000}
-> ```
+## 📂 创建概览
 
-</details>
-
-## 📷 软件截图
-![img](/screenshot/demo1.png)
-
-## 📂 创建预览
-![img](/screenshot/demo2.png)
-
-## 🛠️ 本地编译
-
-一键编译
-
-```bash
-.\build.bat
-```
+![img](screenshot/demo2.png)
 
 ## ⬇️ 下载发行版
 
-前往 [Releases](https://github.com/NeetheCheeBao/CLSIDShellFolderCreator/releases)页面下载
+[![Releases](https://img.shields.io/badge/Download-Releases-7C25FF?style=for-the-badge&logo=github&logoColor=white)](https://github.com/NeetheCheeBao/CLSIDShellFolderCreator/releases)
+
+## 🛠️ 本地编译
+
+1. 克隆仓库到本地
+
+```bash
+git clone https://github.com/NeetheCheeBao/CLSIDShellFolderCreator.git
+```
+
+或者
+
+```bash
+gh repo clone NeetheCheeBao/CLSIDShellFolderCreator
+```
+
+2. 一键编译
+
+```bat
+.\build.bat
+```
+
+- 产物位置：`dist\CLSIDShellFolderCreator.exe`
+
+## 🗂️ 项目结构
+
+```text
+CLSIDShellFolderCreator
+|   .gitignore
+|   build.bat             # 一键编译脚本
+|   build.rs              # 构建脚本，生成图标资源
+|   Cargo.lock            # 依赖版本锁定
+|   Cargo.toml            # 依赖与 release 优化
+|   clsids.json           # CLSID 数据列表
+|   LICENSE
+|   README.md
+|   version.ini           # 版本号
+|
++---assets
+|       icon.ico          # 图标
+|
++---screenshot
+|       demo1.png         # 截图
+|       demo2.png         # 截图
+|
+\---src
+        app.rs            # 界面与业务逻辑
+        data.rs           # 解析 version.ini 与 clsids.json
+        main.rs           # 程序入口、窗口与图标
+        tip.rs            # Win32 悬停气泡
+```
 
 ## ⚖️ 许可证
 
