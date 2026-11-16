@@ -5,7 +5,7 @@
 ![Rust](https://img.shields.io/badge/Rust-2021-orange?style=flat-square&logo=rust)
 ![OS Windows](https://img.shields.io/badge/OS-Windows-0078D6?style=flat-square&logo=windows)
 [![eGUI Rust GUI](https://img.shields.io/badge/UI-eGUI-orange?style=flat-square&logo=rust&logoColor=white)](https://github.com/emilk/egui)
-[![license](https://img.shields.io/github/license/NeetheCheeBao/CLSIDShellFolderCreator?style=flat-square)](LICENSE)
+[![license](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
 > `Rust` + `eGUI` 编写的小工具，一键创建Windows特殊文件夹（例如“上帝模式”等）
 
